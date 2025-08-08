@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // let arr=[ 1,2,3,4,5,6];
+        // arr.push(7);
+        // arr.unshift(4);
+        // console.log(arr);
+
+        // function valueAtIndex(arr,index){
+        //     return arr[index];
+        // }
+        // console.log(valueAtIndex(arr,2));
+        // console.log(valueAtIndex(arr,5));/
+
+        // let num=arr.slice(0,3);
+        // console.log(num);
+        // console.log(arr);  
+           
+            function isPrime(num){
+            for(let i=2;i<num;i++){
+                if(num%i===0){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        let count=0;
+        let j=0;
+        let num=2; 
+        while(true){
+         if(isPrime(num)){
+            console.log(num);
+            count++;
+         }
+            j++;
+            num++;
+            if(count===5){
+                break;
+            }
+        }
+        console.log(count);
+       
+    </script>
+</body>
+</html>
+       
+    

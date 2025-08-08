@@ -1,0 +1,225 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #calculator {
+            border: 1px solid rgb(20, 20, 20);
+            border-radius: 5px;
+            width: 230px;
+            height: 480px;
+            background-color: #6765654e;
+        }
+        #display {
+            width: 90%;
+            height: 30px;
+            border: none;
+            margin: 10px 10px;
+            background-color: #f0f0f0;
+            text-align: right;
+            padding-right: 10px;
+            font-size: 24px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: #8fd37e;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .smt button {
+            background-color: #151515;
+            color: thistle;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <input type="text" id="display"  readonly>
+        <div class="btn-cont">
+
+            <button onclick="currentDisplay= '';
+            document.querySelector('#display').value=currentDisplay;
+            ">C</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '1';
+            document.querySelector('#display').value=currentDisplay;
+            ">1</button>
+
+            <button onclick="currentDisplay=currentDisplay + '2';
+            document.querySelector('#display').value=currentDisplay;">2</button>
+        </div>
+
+        <div class="btn-cont">
+            
+            <button onclick="currentDisplay=currentDisplay + '+';
+            document.querySelector('#display').value=currentDisplay;
+            ">+</button>
+
+            <button onclick="currentDisplay=currentDisplay + '3';
+            document.querySelector('#display').value=currentDisplay;
+            ">3</button>
+
+            <button onclick="currentDisplay=currentDisplay + '4';
+            document.querySelector('#display').value=currentDisplay;
+            ">4</button>
+        </div>
+
+        <div class="btn-cont">
+            <button onclick="currentDisplay=currentDisplay + '-';
+            document.querySelector('#display').value=currentDisplay;
+            ">-</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '5';
+            document.querySelector('#display').value=currentDisplay;
+            ">5</button>
+           
+           <button onclick="currentDisplay=currentDisplay + '6';
+            document.querySelector('#display').value=currentDispplay;
+            ">6</button>
+        </div>
+
+        <div class="btn-cont">
+            <button onclick="currentDisplay=currentDisplay + '*';
+            document.querySelector('#display').value=currentDisplay;
+            ">*</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '7';
+            document.querySelector('#display').value=currentDisplay;
+            ">7</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '8';
+            document.querySelector('#display').value=currentDisplay;
+            ">8</button>
+        </div>
+
+        <div class="btn-cont">
+            <button onclick="currentDisplay=currentDisplay + '/';
+            document.querySelector('#display').value=currentDisplay;
+            ">/</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '9';
+            document.querySelector('#display').value=currentDisplay;
+            ">9</button>
+            
+            <button onclick="currentDisplay=currentDisplay + '0';
+            document.querySelector('#display').value=currentDisplay;
+            ">0</button>
+        </div>
+        
+        <div class="smt btn-cont">
+            <button onclick="
+                let result=eval(currentDisplay);
+                currentDisplay=result;
+                document.querySelector('#display').value=currentDisplay;">=</button>
+    </div>
+    <script>
+        let currentDisplay='';
+        function calculateResult(){
+            const display=document.querySelector("#display").value=currentDisplay;
+        }
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      #calculator {
+        border: 1px solid rgb(20, 20, 20);
+        border-radius: 5px;
+        width: 230px;
+        height: 480px;
+        background-color: #e3d8d8e8;
+      }
+      #display {
+        width: 90%;
+        height: 30px;
+        border: none;
+        margin: 10px 4px;
+        background-color: #daacac;
+        text-align: right;
+        padding-right: 10px;
+        font-size: 24px;
+      }
+      button {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: #8fd37e;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .smt button {
+        background-color: #151515;
+        color: thistle;
+        width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <input type="text" id="display" readonly>
+      <div class="AllBtn" id="buttons"></div>
+      
+    </div>
+    <script>
+      let arr=['C',1,2,'+',3,4,'-',5,6,'*',7,8,'/',9,0,'.','=','%'];
+      var AllBtn=document.querySelector("#buttons");
+       let currentDisplay='';
+       var display=document.querySelector('#display');
+
+      for(var i=0;i<arr.length;i++){
+        var btn=document.createElement('Button');
+        btn.innerText=arr[i];
+        btn.onclick=function(){
+          var value =this.innerText;
+          if(value==='C'){
+            currentDisplay='';
+          }else{
+            currentDisplay+=value;
+          }
+          display.value=currentDisplay;
+        };
+        AllBtn.appendChild(btn);
+      }
+      document.getElementById('equals').onclick=function(){
+        try{
+          currentDisplay=eval(currentDisplay).toString();
+        }catch(error){
+          currentDisplay="ERROR";
+        }
+        display.value=currentDisplay;
+      };
+     
+     
+    </script>
+  </body>
+</html>

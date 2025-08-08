@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to Bat , Ball and Stump Game</h1>
+    <button class="Bat" onclick="generateComputerChoice();
+    let result;
+    if(computerChoice==='Bat'){
+        result='Match Drawn';
+    } else if(computerChoice==='Ball'){
+        result='You have won the match';
+    } else {
+        result='You have lost the match';
+    }
+    console.log('Computer has chosen: ' + computerChoice);
+    console.log(result);
+    ">Bat</button>
+
+    <button class="Ball" onclick="geneateComputerChoice();
+    if(computerChoice==='Bat'){
+        result="you have won the match";
+    } else if(computerChoice==='Ball'){
+        result="Match Drawn";{
+        } else{
+            result="You have lost the match";
+               >Bat</button>
+    
+    <button class="Ball" onclick="console.log('you have chosen ball');
+    randomNumber=Math.random()*3;
+    if(randomNumber>0 && randomNumber<=1){
+        let computerChoice='Bat';
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log('You have lost the match');
+    } else if(randomNumber>1 && randomNumber<=2){
+        let computerChoice='Ball';
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log('Match Drawn');
+    } else {
+        let computerChoice='Stump';
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log('You have won the match');
+    }
+    ">Ball</button>
+
+    <button class="Stump" onclick="generateComputerChoice();
+    if(computerChoice==='Bat'){
+       result="you have lost the match";
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log(result);
+    } else if(computerChoice==='Ball'){
+        result="Match Drawn";
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log(result);
+    } else {
+        result="You have won the match";
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log(result);
+    } else {
+        computerChoice='Stump';
+        console.log('Computer has chosen: ' + computerChoice);
+        console.log('You have won the match');
+    }
+    ">Stump</button>
+<script>
+    let computerChoice;
+    let randomNumber;
+    function generateComputerChoice(){
+        randomNumber=Math.random()*3;
+    if(randomNumber>0 && randomNumber<=1){
+        computerChoice='Bat'; 
+    } else if(randomNumber>1 && randomNumber<=2){
+        computerChoice='Ball';   
+    } else {
+        computerChoice='Stump';  
+    }
+    }
+</script>
+</body>
+</html>

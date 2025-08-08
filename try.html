@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="registrationForm">
+        <input id="" name="" value="" type="text" placeholder="Full Name" required><br>
+        <input id="" name="" value="" type="email" placeholder="Email Address" required><br>
+        <input id="" name="" value="" type="password" placeholder="Password" required><br>
+        <input id="" name="" value="" type="number" placeholder="Phone" required><br>
+        <label>
+        <input id="" type="checkbox" value="on" required> I agree to the Terms & Conditions
+        </label><br>
+        <button id="" id="register-btn" type="submit">Register</button>
+    </form>
+    <script >
+        function validateForm(){
+            var firstname=document.getElementById("firstname").value;
+            var password=document.getElementById("password").value;
+            var email=document.getElementById("email").value;
+            var phone=document.getElementById("phone").value;
+            var address=document.getElementById("address").value;
+                            //    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+            const emailPattern=/^[a-z A-Z 0-9. _%.+-]+@[a-z A-Z 0-9. -]+[a-z A-Z]{2}$/;
+            if (!firstname ||firstname.trim() === "" || firstname.length<6 || /^[a-z A-Z]+$/.test|| firstname){
+                alert("Firstname must contain 6 alphabets ");
+                return false;
+            } if(!password && password.lenght<8){
+                alert("Password must contain 8 characters ");
+                return false;
+            } if(!email || emailPattern.test(email)){
+                alert("Please enter a valid email. ");
+                return false;
+            }if(!phone || !/^\d{10}$/test(phone)){
+                alert("Please enter valid monile number. ");
+                return false;
+            }if(!address ||address.trim() === ""){
+                alert("Please enter valid address. ");
+                return false;
+            }
+            alert("registration sucessful");
+            return true;
+        }
+    </script>
+</body>
+</html>

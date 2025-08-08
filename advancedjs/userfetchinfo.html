@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Info Fetcher</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #output { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Fetch User Info</h2>
+  <input type="number" id="userId" placeholder="Enter User ID (1-10)" />
+  <button id="fetchBtn">Fetch User</button>
+  <p id="loading"></p>
+  <div id="output"></div>
+
+  <script >
+    // 🔹 DOM Manipulation
+const userIdInput = document.getElementById("userId");
+const fetchBtn = document.getElementById("fetchBtn");
+const output = document.getElementById("output");
+const loading = document.getElementById("loading");
+
+// 🔹 Closure Example: Counter for how many users fetched
+function fetchCounter() {
+  let count = 0;
+  return function() {
+    count++;
+    return count;
+  };
+}
+const countUserFetch = fetchCounter();
+
+// 🔹 Fetch function with async/await
+async function getUser(id) {
+  loading.textContent = "Loading...";
+  try {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    if (!res.ok) throw new Error("User not found");
+    const data = await res.json();
+    displayUser(data);
+    loading.textContent = `Total fetches: ${countUserFetch()}`;
+  } catch (error) {
+    loading.textContent = "Error: " + error.message;
+    output.innerHTML = "";
+  }
+}
+
+// // 🔹 Callback Hell Example (for learning only, not used here)
+// function callbackHellExample(cb) {
+//   setTimeout(() => {
+//     cb("Step 1", () => {
+//       setTimeout(() => {
+//         cb("Step 2", () => {
+//           setTimeout(() => {
+//             cb("Step 3", () => {
+//               console.log("Done");
+//             });
+//           }, 500);
+//         });
+//       }, 500);
+//     });
+//   }, 500);
+// }
+
+// 🔹 Display Function
+function displayUser(user) {
+  output.innerHTML = `
+    <h3>${user.name}</h3>
+    <p>Email: ${user.email}</p>
+    <p>City: ${user.address.city}</p>
+  `;
+}
+
+// // 🔹 Hoisting Example
+// hoistTest();
+// function hoistTest() {
+//   console.log("This function is hoisted!");
+// }
+
+// // 🔹 Scope Example
+// function scopeTest() {
+//   let a = 5;
+//   if (true) {
+//     let b = 10;
+//     console.log("Inside block:", a, b);
+//   }
+//   // console.log(b); ❌ Error: b is not defined (block-scoped)
+// }
+// scopeTest();
+
+// 🔹 Event Listener
+fetchBtn.addEventListener("click", () => {
+  const userId = userIdInput.value;
+  if (userId >= 1 && userId <= 10) {
+    getUser(userId);
+  } else {
+    alert("Enter a number between 1 and 10");
+  }
+});
+
+  </script>
+</body>
+</html>

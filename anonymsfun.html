@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Example</title>
+    <style>
+      .myButton {
+        font-size: 20px;
+        height: 50px;
+        width: 150px;
+        background-color: blue;
+        color: rgb(226, 55, 55);
+        margin: 10px;
+      }
+      .sizeDouble {
+        height: 100px;
+        width: 300px;
+        font-size: 40px;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="myButton">Click Me</button>
+    <button class="myButton">Click Me</button>
+
+    <script>
+      // Multiply function using arrow syntax
+      let multiply = (num1, num2) => num1 * num2;
+      console.log("5 * 3 =", multiply(5, 3));
+
+      // runTwice function
+      let func = () => console.log("Hello World");
+      let runTwice = function (callback) {
+        callback();
+        callback();
+      };
+      runTwice(func);
+
+      // Add event listener to all buttons
+      let buttons = document.querySelectorAll(".myButton");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          setTimeout(() => {
+            btn.classList.add("sizeDouble");
+          }, 2000); // 2 seconds delay
+        });
+      });
+
+      // Array forEach sum
+      let arr = [1, 2, 3, 4, 5];
+      let sum = 0;
+      arr.forEach((num) => (sum += num));
+      console.log("Sum =", sum);
+
+      // Map for squares
+      let square = arr.map((num) => num * num);
+      console.log("Squares =", square);
+    </script>
+  </body>
+</html>

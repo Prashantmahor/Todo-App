@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <h1>Welcome to My Page</h1>
+    <button>Click Me1</button>
+    <button class="b2">Click Me2</button>
+    <button class="b2">Click Me2</button>
+    <button id="b3">Click Me3</button>
+    <script>
+        document.querySelector("button").addEventListener("click", function() {
+            alert("Button was clicked!");
+        });
+document.getElementById("b3").addEventListener("click", function(){
+    alert("hey this is button 3");
+});
+document.getElementsByClassName("b2")[0].addEventListener("click", function(){
+    alert("hey this is button 2");
+    document.getElementsByClassName("b2")[1].addEventListener("click", function(){
+        alert("hey this is button 2");
+    });
+});
+document.querySelector("button").click();
+console.log("This is a console log message.");
+    </script>
+</body>
+</html>

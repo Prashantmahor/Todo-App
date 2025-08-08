@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name: 'prashant',
+            age: 25,
+            isStudent: true
+        };
+        // Storing an object in localStorage
+
+        localStorage.setItem('person', person);// person is an object not a string
+
+        localStorage.setItem('person', JSON.stringify(person));
+        localStorage.setItem('name', 'prashant');
+        localStorage.setItem('age', '25');
+        localStorage.setItem('isStudent', 'true');
+       
+        // Retrieving the object from localStorage
+        let storedPerson = JSON.parse(localStorage.getItem('person'));
+        console.log(storedPerson.name); // 'prashant'
+        console.log(storedPerson.age); // 25
+        console.log(storedPerson.isStudent); // truel
+
+        //removing an item from localStorage
+        localStorage.removeItem('name');
+        localStorage.removeItem('age');
+       
+        // Clearing all items from localStorage
+        // localStorage.clear();
+    </script>
+</body>
+</html>
