@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bat, Ball & Stump Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      height: 1500px;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin-bottom: 30px;
+      color: #00ffd5;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .choice {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform .5s;
+    }
+
+    .choice img {
+      margin-top: 50px;
+      width: 150px;
+      height: 150px;
+      transition: transform .5s;
+    }
+
+    .choice:hover img {
+      transform: scale(1.3);
+    }
+
+    .output {
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .score {
+      margin-top: 40px;
+      font-size: 40px;
+      color: #ffeb3b;
+    }
+
+    .highlight {
+      color: #00ffd5;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏏 Bat, Ball & Stump</h1>
+    
+    <div class="buttons">
+      <button class="choice" onclick="playGame('Bat')">
+        <img src="bat.webp" alt="Bat">
+      </button>
+      <button class="choice" onclick="playGame('Ball')">
+        <img src="ball.png" alt="Ball">
+      </button>
+      <button class="choice" onclick="playGame('Stump')">
+        <img src="stump.png" alt="Stump">
+      </button>
+    </div>
+
+    <div class="output" id="output"></div>
+    <div class="score">
+      👤 You: <span id="userScore" class="highlight">0</span> | 🤖 Computer: <span id="compScore" class="highlight">0</span>
+    </div>
+  </div>
+
+  <!-- Sound Effects with fallback -->
+  <audio id="winSound" preload="auto">
+    <source src="win.mp3" type="audio/mpeg">
+    <!-- <source src="win.ogg" type="audio/ogg"> -->
+  </audio>
+
+  <audio id="loseSound" preload="auto">
+    <source src="lose.mp3" type="audio/mpeg">
+    <!-- <source src="lose.ogg" type="audio/ogg"> -->
+  </audio>
+
+  <audio id="drawSound" preload="auto">
+    <source src="drawn.mp3" type="audio/mpeg">
+    <!-- <source src="draw.ogg" type="audio/ogg"> -->
+  </audio>
+
+  <script>
+    let userScore = 0;
+    let compScore = 0;
+
+    function playGame(userChoice) {
+      const choices = ['Bat', 'Ball', 'Stump'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let result = "";
+      let soundToPlay = "";
+
+      if (userChoice === computerChoice) {
+        result = "Match Drawn";
+        soundToPlay = "drawSound";
+      } else if (
+        (userChoice === "Bat" && computerChoice === "Ball") ||
+        (userChoice === "Ball" && computerChoice === "Stump") ||
+        (userChoice === "Stump" && computerChoice === "Bat")
+      ) {
+        result = "🎉 You Won!";
+        userScore++;
+        soundToPlay = "winSound";
+      } else {
+        result = "💀 You Lost!";
+        compScore++;
+        soundToPlay = "loseSound";
+      }
+
+      document.getElementById("output").innerHTML =
+        `You chose: <span class="highlight">${userChoice}</span><br>
+         Computer chose: <span class="highlight">${computerChoice}</span><br>
+         <span>${result}</span>`;
+
+      document.getElementById("userScore").textContent = userScore;
+      document.getElementById("compScore").textContent = compScore;
+      playSound(soundToPlay);
+    }
+
+    // Function to play sound with error handling
+    function playSound(id) {
+      const sound = document.getElementById(id);
+      if (sound) {
+        const playPromise = sound.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log(id + " played");
+            })
+            .catch((error) => {
+              console.error("Audio play error:", error);
+            });
+        }
+      }
+    }
+  </script>
+</body>
+</html>
