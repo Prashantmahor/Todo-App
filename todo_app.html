@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #75d8f3, #41807d);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 50px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #6c63ff;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #584ee1;
+    }
+
+    h2 {
+      margin-top: 25px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    li:hover {
+      transform: scale(1.02);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .delete-btn, .edit-btn {
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      color: white;
+      transition: background .5s;
+    }
+
+    .delete-btn {
+      background: #ff4d4d;
+    }
+
+    .delete-btn:hover {
+      background: #ec3131;
+    }
+
+    .edit-btn {
+      background: #4caf50;
+    }
+
+    .edit-btn:hover {
+      background: #3d8c40;
+    }
+
+    .date {
+      font-size: 12px;
+      color: #777;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Todo App</h1>
+
+    <div class="input-group">
+      <input type="text" placeholder="Add a new todo" id="todoInput">
+      <button onclick="addTodo()">Add</button>
+    </div>
+
+    <h2>Todo List</h2>
+    <ul id="todoList"></ul>
+  </div>
+
+  <script>
+    let todoList = [];
+
+    function addTodo() {
+      let inputElement = document.querySelector('#todoInput');
+      let todoItem = inputElement.value.trim();
+
+      if (todoItem === "") {
+        alert("Please enter a todo item");
+        return;
+      }
+
+      let createdDate = new Date().toLocaleString();
+
+      todoList.push({ text: todoItem, date: createdDate });
+      inputElement.value = "";
+      renderList();
+    }
+
+    function deleteTodo(index) {
+      todoList.splice(index, 1);
+      renderList();
+    }
+
+    function editTodo(index) {
+      let newText = prompt("Edit your task:", todoList[index].text);
+      if (newText !== null && newText.trim() !== "") {
+        todoList[index].text = newText.trim();
+        renderList();
+      }
+    }
+
+    function renderList() {
+      let listElement = document.querySelector('#todoList');
+      listElement.innerHTML = "";
+
+      todoList.forEach((todo, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `
+          <span>${todo.text} <span class="date">(Created: ${todo.date})</span></span>
+          <div class="action-buttons">
+            <button class="edit-btn" onclick="editTodo(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
+          </div>
+        `;
+        listElement.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
